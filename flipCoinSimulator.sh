@@ -30,17 +30,27 @@ local coinValue=""
 		echo $coinValue
 }
 
+function simulator()
+{
 for (( j=0; j<$num; j++ ))
 	do
 	result=$(flipCoin)
 	echo $result
-	Dictionary[$result]=$(( ${Dictionary[$result]} + 1 ))  	#uc2 store in dictionary
-	echo "Dictionary::"{Dictionary[$result]}	#display dictionary
+	Dictionary[$result]=$(( ${Dictionary[$result]} + 1 ))  	#uc2 store  in dictionary , Uc3 store doublet in dictionary
+	#echo "Dictionary::"{Dictionary[$result]}	#display dictionary
 done
 
 for result in ${!Dictionary[@]}
 	do
 		echo ${Dictionary[$result]}
-		percentage=$(( ${Dictionary[$result]} *100 / $num ))	#singlet percentage
-		echo "conbination result"$result"	"$percentage"%"
+		percentage=$(( ${Dictionary[$result]} *100 / $num ))	#singlet percentage, doublet percent
+if [ $coin -eq 2 ]
+then
+		echo "conbination result for doublet:"$result"	"$percentage"%"
+else
+		echo "conbination result:"$result"  "$percentage"%"
+fi
 	done
+}
+
+simulator
