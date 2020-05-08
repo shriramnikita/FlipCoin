@@ -8,6 +8,9 @@ read -p "How Many Coin You Want To Flip..?? " coin
 echo  "How Many Time You Want To Flip..?? " 
 read num
 
+#uc2:declaration of dictionary to store combination
+declare -A Dictionary
+
 function flipCoin()
 {
 local coinValue=""
@@ -31,4 +34,13 @@ for (( j=0; j<$num; j++ ))
 	do
 	result=$(flipCoin)
 	echo $result
+	Dictionary[$result]=$(( ${Dictionary[$result]} + 1 ))  	#uc2 store in dictionary
+	echo "Dictionary::"{Dictionary[$result]}	#display dictionary
 done
+
+for result in ${!Dictionary[@]}
+	do
+		echo ${Dictionary[$result]}
+		percentage=$(( ${Dictionary[$result]} *100 / $num ))	#singlet percentage
+		echo "conbination result"$result"	"$percentage"%"
+	done
