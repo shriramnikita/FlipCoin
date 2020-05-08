@@ -44,20 +44,23 @@ for result in ${!Dictionary[@]}
 	do
 		echo ${Dictionary[$result]}
 		percentage=$(( ${Dictionary[$result]} *100 / $num ))	#singlet percentage, uc3 doublet percent ,uc4 triplet percent
+#  echo "comb"$result"  "$percentage"%"
+
+
 if [ $coin -eq 2 ]
 then
-		echo "conbination result for doublet:"$result"	"$percentage"%"
+		echo "conbination result for doublet"$result" "$percentage"%"
 
 elif [ $coin -eq 3 ]
 then
-		echo "conbination result for triplet:"$result"  "$percentage"%"
+		echo "conbination result for triplet"$result" "$percentage"%"
 
 else
-  echo "conbination result:"$result"  "$percentage"%"
+  echo $result"  "$percentage"%"
 
 fi
 
-	done
+	done | sort -k2 -nr | awk 'NR==1{print ($1"	"$2)}'
 }
 
 simulator
